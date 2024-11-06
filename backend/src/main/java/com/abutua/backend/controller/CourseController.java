@@ -1,4 +1,4 @@
-package com.abutua.controller;
+package com.abutua.backend.controller;
 
 public class CourseController {
     

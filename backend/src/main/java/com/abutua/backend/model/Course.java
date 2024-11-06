@@ -1,4 +1,4 @@
-package com.abutua.model;
+package com.abutua.backend.model;
 
 public class Course {
     private int id;

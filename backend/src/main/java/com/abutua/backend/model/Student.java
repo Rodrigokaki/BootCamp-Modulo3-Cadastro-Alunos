@@ -1,4 +1,4 @@
-package com.abutua.model;
+package com.abutua.backend.model;
 
 public class Student {
     private int id;
@@ -6,9 +6,9 @@ public class Student {
     private String email;
     private String phone;
     private int idCurso;
-    private int period;
+    private String period;
     
-    public Student(int id, String name, String email, String phone, int idCurso, int period) {
+    public Student(int id, String name, String email, String phone, int idCurso, String period) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -57,11 +57,11 @@ public class Student {
         this.idCurso = idCurso;
     }
 
-    public int getPeriod() {
+    public String getPeriod() {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 
