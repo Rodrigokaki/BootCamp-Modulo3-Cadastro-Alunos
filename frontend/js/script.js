@@ -1,8 +1,19 @@
 students = [];
 
-courses = ['Java', 'Angular', 'React'];
+courses = [];
 
 loadStudents();
+loadCourses();
+
+function loadCourses(){
+    $.getJSON("http://localhost:8080/courses", (response) =>{
+        courses = response;
+        for(let course of courses){
+            document.getElementById("inputCourse").innerHTML +=
+            `<option value="${course.id}">${course.name}</option>`
+        }
+    })
+}
 
 function loadStudents(){
     $.getJSON("http://localhost:8080/students", (response) =>{
