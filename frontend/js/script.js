@@ -1,22 +1,16 @@
-students = [
-    {
-        id : 1,
-        name : 'Pedro Antonio',
-        email : 'pedro@abutua.com',
-        tel : '(15) 99999-9999',
-        course : 2,
-        shift : 'Tarde'
-    }
-];
+students = [];
 
 courses = ['Java', 'Angular', 'React'];
 
-addAllRow(students);
+loadStudents();
 
-function addAllRow(students){
-    for(let student of students){
-        addRow(student);
-    }
+function loadStudents(){
+    $.getJSON("http://localhost:8080/students", (response) =>{
+        students = response;
+        for(let student of students){
+            addRow(student);
+        }
+    })
 }
 
 function addRow(student){
@@ -32,28 +26,28 @@ function addRow(student){
 
     telCell = row.insertCell();
     telCell.className = 'd-none d-md-table-cell';
-    telCell.innerHTML = student.tel;
+    telCell.innerHTML = student.phone;
 
     courseCell = row.insertCell();
     courseCell.className = 'd-none d-sm-table-cell';
-    courseCell.innerHTML = courses[student.course-1];
+    courseCell.innerHTML = courses[student.idCurso-1];
 
-    shiftCell = row.insertCell();
-    shiftCell.className = 'd-none d-sm-table-cell';
-    shiftCell.innerHTML = student.shift;
+    periodCell = row.insertCell();
+    periodCell.className = 'd-none d-sm-table-cell';
+    periodCell.innerHTML = student.period;
 }
 
 function save(){
-    idRadio = Array.from(document.getElementsByName("radioShift")).find(r => r.checked).id;
+    idRadio = Array.from(document.getElementsByName("radioperiod")).find(r => r.checked).id;
     switch(idRadio) {
         case 'radioMorning':
-          inputShift = 'Manhã'
+          inputperiod = 'Manhã'
           break;
         case 'radioEvening':
-            inputShift = 'Tarde'
+            inputperiod = 'Tarde'
           break;
         case 'radioNight':
-            inputShift = 'Noite'
+            inputperiod = 'Noite'
         break;
       }
 
@@ -63,7 +57,7 @@ function save(){
         email : document.getElementById("inputEmail").value,
         tel : document.getElementById("inputTelephone").value,
         course : document.getElementById("inputCourse").value,
-        shift : inputShift
+        period : inputperiod
 
     }
 

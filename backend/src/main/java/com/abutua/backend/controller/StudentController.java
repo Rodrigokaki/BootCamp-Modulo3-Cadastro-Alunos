@@ -22,9 +22,9 @@ public class StudentController {
     
     private ArrayList<Student> students = new ArrayList<Student>();
     
-    Student student1 = new Student(1, "Rodrigo Kakiuchi", "rodrigo@email.com", "(11) 11111-1111", 0, "Manha");
-    Student student2 = new Student(2, "Glauco Todesco", "glauco@email.com", "(22) 22222-2222", 1, "Tarde");
-    Student student3 = new Student(3, "Joao da Silva", "joao@email.com", "(33) 33333-3333", 2, "Noite");
+    Student student1 = new Student(1, "Rodrigo Kakiuchi", "rodrigo@email.com", "(11) 11111-1111", 1, "Manhã");
+    Student student2 = new Student(2, "Glauco Todesco", "glauco@email.com", "(22) 22222-2222", 2, "Tarde");
+    Student student3 = new Student(3, "Joao da Silva", "joao@email.com", "(33) 33333-3333", 3, "Noite");
     
     public StudentController(){
         students.add(student1);
