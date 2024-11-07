@@ -2,17 +2,23 @@ students = [];
 
 courses = [];
 
-loadStudents();
 loadCourses();
+loadStudents();
 
 function loadCourses(){
-    $.getJSON("http://localhost:8080/courses", (response) =>{
-        courses = response;
-        for(let course of courses){
-            document.getElementById("inputCourse").innerHTML +=
-            `<option value="${course.id}">${course.name}</option>`
+    $.ajax({
+        url: "http://localhost:8080/courses",
+        type: "GET",
+        async: false,
+        success: (response) => {
+            courses = response;
+            for(let course of courses){
+                document.getElementById("inputCourse").innerHTML +=
+                `<option value="${course.id}">${course.name}</option>`
+            }
         }
-    })
+    }
+    )
 }
 
 function loadStudents(){
@@ -41,7 +47,7 @@ function addRow(student){
 
     courseCell = row.insertCell();
     courseCell.className = 'd-none d-sm-table-cell';
-    courseCell.innerHTML = courses[student.idCurso-1];
+    courseCell.innerHTML = courses[student.idCurso-1].name;
 
     periodCell = row.insertCell();
     periodCell.className = 'd-none d-sm-table-cell';
@@ -66,16 +72,24 @@ function save(){
         id : students.length + 1,
         name : document.getElementById("inputName").value,
         email : document.getElementById("inputEmail").value,
-        tel : document.getElementById("inputTelephone").value,
-        course : document.getElementById("inputCourse").value,
+        phone : document.getElementById("inputTelephone").value,
+        idCurso : document.getElementById("inputCourse").value,
         period : inputperiod
 
     }
 
-    addRow(newStudent);
-    students.push(newStudent);
-
-    document.getElementById("formStudents").reset();
+    $.ajax({
+        url: "http://localhost:8080/students",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(newStudent),
+        success: (newStudent) => {
+            addRow(newStudent);
+            students.push(newStudent);
+            document.getElementById("formStudents").reset();
+        }
+    }
+    )
 }
 
 //mask
